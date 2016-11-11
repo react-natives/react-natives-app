@@ -24,5 +24,8 @@ App for React & React Native developers developed together with the community as
 ## Useful hints extending the app
 - If you are adding new dependencies with npm install --save <npm-package-name> you may need to runs "react-native link" afterwards to link the package in the native iOS / Android projects
 
+## Screenshots
+![Map screen](https://github.com/react-natives/screenshots/blob/master/react-natives-app/map.png "Map screen")
+
 
 
