@@ -26,6 +26,7 @@ App for React & React Native developers developed together with the community as
 
 ## Screenshots
 ![Map screen](https://github.com/react-natives/screenshots/blob/master/react-natives-app/map.png "Map screen")
+![List screen](https://github.com/react-natives/screenshots/blob/master/react-natives-app/list.png "List screen")
 
 
 
