@@ -8,8 +8,5 @@
 - npm install
 - react-native link
 - react-native run-ios or react-native run-android
-
-## Assumes an installation of 
-- react-native-cli 
-- Xcode 8 for iOS
-- Android Studio for Android
+- assumes an installation of node, watchman, react-native-cli 
+- assumes installation of Xcode 8 for iOS & Android Studio for Android
