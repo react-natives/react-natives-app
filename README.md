@@ -2,11 +2,23 @@
 
 1st workshop of the React Native Munich Meetup group
 
-## Getting started 
-- https://facebook.github.io/react-native/docs/getting-started.html
-- clone project from github
+## Install development tools
+- Getting started guide (select your mobile and desktop OS): https://facebook.github.io/react-native/docs/getting-started.html
+- assuming you have installed node, watchman, react-native-cli
+- for iOS development: you need a Mac and Xcode (version 8 is currently required, I will downgrade this requirement)
+- for Android development: you need Android Studio and the Android SDK and follow the steps in the getting started
+
+## Install the project
+- git clone https://github.com/react-natives/react-natives-app.git
 - npm install
-- react-native link
-- react-native run-ios or react-native run-android
-- assumes an installation of node, watchman, react-native-cli 
-- assumes installation of Xcode 8 for iOS & Android Studio for Android
+
+## Run the project
+- iOS react-native run-ios starts the App in the simulator (which is really good)
+- Android: react-native run-android runs the Android App. It is recommended to connect a real phone in development mode (see the official getting started) beforehand because the Android simulator is really slow (or try GenyMotion): https://facebook.github.io/react-native/docs/running-on-device-android.html
+
+## Adding dependencies
+- npm install --save <npm-package-name>
+- react-native link will update the native iOS / Android projects if necessary
+
+
+
