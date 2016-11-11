@@ -14,7 +14,7 @@ App for React & React Native developers developed together with the community as
 
 ## Run the project
 - iOS react-native run-ios starts the App in the simulator (which is really good)
-- Android: react-native run-android runs the Android App. It is recommended to connect a real phone in development mode (see the official getting started) beforehand because the Android simulator is really slow (or try GenyMotion): https://facebook.github.io/react-native/docs/running-on-device-android.html
+- Android: react-native run-android runs the Android App. It is recommended to connect a real phone in development mode (see the official getting started) beforehand because the Android simulator is really slow (or try GenyMotion): https://facebook.github.io/react-native/docs/running-on-device-android.html. Also you need to register an Google maps API key: https://developers.google.com/maps/documentation/android-api/
 
 ## Useful tipps when you extend the app
 - If you are adding new dependencies with npm install --save <npm-package-name> you may need to runs "react-native link" afterwards to link the package in the native iOS / Android projects
