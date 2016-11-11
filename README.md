@@ -1,6 +1,6 @@
-# react-natives-app
+# React Natives App
 
-1st workshop of the React Native Munich Meetup group
+App for React & React Native developers developed together with the community as a live React Native example 
 
 ## Install development tools
 - Getting started guide (select your mobile and desktop OS): https://facebook.github.io/react-native/docs/getting-started.html
