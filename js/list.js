@@ -27,20 +27,32 @@ export default class List extends Component {
         {
           title: 'Munich, October 11, 2016',
           description: 'React Native Intro, React Native Munich, Codecentric, Elsenheimerstr. 55a, Munich',
+          coodinates: {
+             latitude: 48.1368369,
+             longitude: 11.523603
+          }
         },
         {
           title: 'Cologne, October 27, 2016',
           description: 'React Native Intro, React Native Cologne, InTradeSys, Dillenburgerstr. 75, Cologne',
+          coodinates: {
+             latitude: 50.934017,
+             longitude: 7.011037
+          },
         },
         {
           title: 'Munich, November 10, 2016',
           description: 'React Native Demo & Workshop, React Native Munich, Codecentric, Elsenheimerstr. 55a, Munich',
+          coodinates: {
+             latitude: 48.1368369,
+             longitude: 11.523603
+          },
         }
       ]),
       nav: [
-        () => Actions.map(),
-        () => Actions.map(),
-        () => Actions.map(),
+        (data) => Actions.map(data),
+        (data) => Actions.map(data),
+        (data) => Actions.map(data),
       ]
     };
     this._renderRow = this._renderRow.bind(this);
@@ -48,7 +60,10 @@ export default class List extends Component {
   }
 
   _pressRow(rowID: number) {
-    this.state.nav[rowID]();
+    let data = this.state.dataSource.getRowData(0, rowID);
+
+    // convert data from type Object to Map, otherwise is will not passed thru to the scene
+    this.state.nav[rowID]( new Map( Object.keys(data).map(key => [key, data[key]]) ) );
   }
 
   _renderRow(rowData: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {

@@ -17,7 +17,7 @@ import MapView from 'react-native-maps';
 
 export default class Map extends Component {
   render() {
-    const latitude = 48.1368369, longitude = 11.523603;
+    const latitude = this.props.data.get('coodinates').latitude, longitude = this.props.data.get('coodinates').longitude;
     return (
       <View style={styles.container}>
         <MapView
@@ -37,7 +37,7 @@ export default class Map extends Component {
             anchor={{ x: 0.69, y: 1 }}
           />
         </MapView>
-        <TouchableOpacity onPress={() => Linking.openURL('http://maps.apple.com/?ll=48.1368369,11.523603')} style={{backgroundColor: '#5555FF', borderRadius: 10, opacity: 1, margin: 20}}>
+        <TouchableOpacity onPress={() => Linking.openURL('http://maps.apple.com/?ll='+latitude+','+longitude)} style={{backgroundColor: '#5555FF', borderRadius: 10, opacity: 1, margin: 20}}>
           <Text style={styles.textBold}>
             <Text style={styles.text}>> Take me to the </Text>Meetup
           </Text>
