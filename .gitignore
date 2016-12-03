@@ -21,6 +21,7 @@ DerivedData
 *.ipa
 *.xcuserstate
 project.xcworkspace
+.vscode
 
 # Android/IJ
 #
@@ -39,3 +40,7 @@ buck-out/
 \.buckd/
 android/app/libs
 android/keystores/debug.keystore
+
+typings/react-native.d.ts
+
+tsconfig.json

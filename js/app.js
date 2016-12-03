@@ -13,23 +13,21 @@ import {
     StatusBar
 } from 'react-native';
 import { Router, Scene } from 'react-native-router-flux';
-import Map from './map';
-import List from './list';
+import Map from './meetups/map';
+import List from './meetups/list';
 
-export class App extends Component {
+export class App extends Component {    
+
     render() {
         return (
             <View style={{flex:1}}>
-                <StatusBar
-                    barStyle="light-content"
-                />
+                <StatusBar barStyle="light-content"/>
                 <Router>
                     <Scene key="root">
                         <Scene navigationBarStyle={styles.navBar}
                                backButtonImage={require('./../assets/back_chevron.png')}
                                titleStyle={styles.navBarText} key="map" component={Map} title="Meetup Location"/>
                         <Scene navigationBarStyle={styles.navBar}
-
                                titleStyle={styles.navBarText} key="list" component={List} title="Meetups" initial={true}/>
                     </Scene>
                 </Router>

@@ -15,6 +15,11 @@ import {
 } from 'react-native';
 import MapView from 'react-native-maps';
 
+const person = {
+  firstName: "Thomas",
+  lastName: "Tränkler" 
+}
+
 export default class Map extends Component {
   render() {
     const latitude = 48.1368369, longitude = 11.523603;

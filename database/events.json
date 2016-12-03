@@ -1,0 +1,44 @@
+[
+    {
+        "topic": "React Native Intro",
+        "organisator": "Thomas Tränkler",
+        "time": "2016-10-11T19:00",
+        "host": "Robert Hostlowsky",
+        "speakers": "Thomas Tränkler",
+        "type": "Meetup",
+        "group": "React Native Munich",
+        "location": {
+            "name": "Codecentric",
+            "street": "Elsenheimerstr. 55a",
+            "city": "Munich" 
+        }
+    },
+    {
+        "topic": "React Native Intro",
+        "organisator": "Thomas Tränkler",
+        "time": "2016-10-27T19:00",
+        "host": "Thomas Tränkler",
+        "speakers": "Thomas Tränkler",
+        "type": "Meetup",
+        "group": "React Native Cologne",
+        "location": {
+            "name": "InTradeSys",
+            "street": "Dillenburgerstr. 75",
+            "city": "Cologne"
+        }
+    },
+    {
+        "topic": "React Native Demo & Live Coding Workshop",
+        "time": "2016-11-10T19:00",
+        "organisator": "Thomas Tränkler",
+        "host": "Robert Hostlowsky",
+        "speakers": [ "Wolfram Kriesing", "Thomas Tränkler" ],
+        "group": "React Native Munich",
+        "type": "Meetup",
+        "location": {
+            "name": "Codecentric",
+            "street": "Elsenheimerstr. 55a",
+            "city": "Munich" 
+        }
+    }
+]

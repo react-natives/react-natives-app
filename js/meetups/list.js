@@ -16,39 +16,24 @@ import {
   Alert
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import events from '../../database/events.json';
+import moment from 'moment';
 
 export default class List extends Component {
 
   constructor(props) {
+    console.log(events);
     super(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows([
-        {
-          title: 'Munich, October 11, 2016',
-          description: 'React Native Intro, React Native Munich, Codecentric, Elsenheimerstr. 55a, Munich',
-        },
-        {
-          title: 'Cologne, October 27, 2016',
-          description: 'React Native Intro, React Native Cologne, InTradeSys, Dillenburgerstr. 75, Cologne',
-        },
-        {
-          title: 'Munich, November 10, 2016',
-          description: 'React Native Demo & Workshop, React Native Munich, Codecentric, Elsenheimerstr. 55a, Munich',
-        }
-      ]),
-      nav: [
-        () => Actions.map(),
-        () => Actions.map(),
-        () => Actions.map(),
-      ]
+      dataSource: ds.cloneWithRows(events),
     };
     this._renderRow = this._renderRow.bind(this);
     this._pressRow = this._pressRow.bind(this);
   }
 
   _pressRow(rowID: number) {
-    this.state.nav[rowID]();
+    Actions.map();
   }
 
   _renderRow(rowData: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
@@ -61,9 +46,14 @@ export default class List extends Component {
         <View style={{flexDirection: 'row', backgroundColor: 'white'}}>
           <View style={styles.row}>
             <Text style={styles.textBold}>
-              {rowData.title}
+              {rowData.group}
             </Text>
-            <Text style={styles.text}>{rowData.description}</Text>
+            <Text style={styles.text}>
+              {rowData.location.city}, {moment(rowData.time).format('LLL')}
+            </Text>
+            <Text style={styles.text}>
+              {rowData.topic}
+            </Text>
           </View>
         </View>
       </TouchableHighlight>
@@ -76,7 +66,7 @@ export default class List extends Component {
           style={{
             height: adjacentRowHighlighted ? 4 : 1,
             backgroundColor: adjacentRowHighlighted ? '#3B5998' : '#CCCCCC',
-            marginHorizontal: 15
+            marginLeft: 15
           }}
     />
     );
@@ -111,7 +101,7 @@ let styles = {
     //...StyleSheet.absoluteFillObject,
     justifyContent: 'flex-end',
     flex: 1,
-    backgroundColor: '#F5FCFF',
+    backgroundColor: 'white',
     marginTop: 63,
   },
   text: {
