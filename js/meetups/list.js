@@ -5,6 +5,7 @@
  */
 
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import {
   AppRegistry,
   StyleSheet,
@@ -16,17 +17,15 @@ import {
   Alert
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import events from '../../database/events.json';
 import moment from 'moment';
 
-export default class List extends Component {
+class List extends Component {
 
   constructor(props) {
-    console.log(events);
     super(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows(events),
+      dataSource: ds.cloneWithRows(props.events),
     };
     this._renderRow = this._renderRow.bind(this);
     this._pressRow = this._pressRow.bind(this);
@@ -49,10 +48,10 @@ export default class List extends Component {
               {moment(rowData.time).format('LL')}, {rowData.location.city}
             </Text>
             <Text style={styles.title}>
-                {rowData.group} 
-                
+                {rowData.group}
+
             </Text>
-         
+
 <Text style={styles.description}>
                 {rowData.title}
             </Text>
@@ -142,3 +141,8 @@ styles.description =  {
 
 styles = StyleSheet.create(styles);
 
+export default connect(
+  (state) => ({
+    events: state.events
+  })
+)(List)
