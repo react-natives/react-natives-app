@@ -45,15 +45,18 @@ export default class List extends Component {
       }}>
         <View style={{flexDirection: 'row', backgroundColor: 'white'}}>
           <View style={styles.row}>
-            <Text style={styles.textBold}>
-              {rowData.group}
-            </Text>
             <Text style={styles.text}>
-              {rowData.location.city}, {moment(rowData.time).format('LLL')}
+              {moment(rowData.time).format('LL')}, {rowData.location.city}
             </Text>
-            <Text style={styles.text}>
-              {rowData.topic}
+            <Text style={styles.title}>
+                {rowData.group} 
+                
             </Text>
+         
+<Text style={styles.description}>
+                {rowData.title}
+            </Text>
+
           </View>
         </View>
       </TouchableHighlight>
@@ -104,8 +107,16 @@ let styles = {
     backgroundColor: 'white',
     marginTop: 63,
   },
-  text: {
+  title: {
     fontSize: 14,
+    fontWeight: 'bold',
+    textAlign: 'left',
+    margin: 3,
+    color: 'black',
+    backgroundColor: 'transparent'
+  },
+  text: {
+    fontSize: 12,
     fontWeight: 'normal',
     textAlign: 'left',
     margin: 3,
@@ -118,15 +129,14 @@ let styles = {
   row: {
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    padding: 20,
+    padding: 15,
     backgroundColor: 'white',
   },
 };
 
-styles.textBold = {
+styles.description =  {
   ...styles.text,
-  fontWeight: 'bold',
-  fontSize: 16,
+  fontSize: 14,
   color: 'black'
 };
 

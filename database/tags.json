@@ -1,10 +1,53 @@
-    [
-        "react", 
-        "react-native", 
-        "Windows", 
-        "Android", 
-        "Linux", 
-        "iOS", 
-        "Android", 
-        "react-native-maps"
-    ]
+    {
+        "type": {
+            "npm package": {
+                "react": {}, 
+                "react-native": {},
+                "redux": {},
+                "react-redux": {},
+                "react-native-router-flux": {},
+                "react-native-maps": {},
+                "redux-persist": {}
+            },
+            "operating system": {
+                "Windows": {},
+                "Unix": {
+                    "Linux": {
+                        "Ubuntu": {},
+                        "Android": {}
+                    },
+                    "MacOS": {},
+                    "iOS": {}
+                }
+            },
+            "device": {
+                "smartphone": {
+                    "iPhone": {}
+                },
+                "tablet": {
+                    "iPad": {}
+                },
+                "computer": {}
+            },
+            "company": {
+                "Apple": {},
+                "Samsung": {},
+                "Google": {},
+                "Microsoft": {},
+                "Facebook": {},
+                "Codecentric": {},
+                "InTradeSys": {},
+                "Commercetools": {},
+                "Publicis Pixelpark": {}
+            },
+            "event": {
+                "presentation": {},
+                "workshop": {},
+                "meetup": {}
+            },
+            "city": {
+                "München": {},
+                "Köln": {}
+            }
+        }
+    }

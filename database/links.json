@@ -1,12 +1,14 @@
-[
-    {
+{
+    "react-native": {
         "title": "React Native",
         "url": "https://facebook.github.io/react-native/",
-        "tags": ["react-native", "iOS", "Android"]
+        "description": "Javascript library for authoring dynamic websites",
+        "topic": "react-native"
     },
-    {
+    "react": {
         "title": "React",
         "url": "https://facebook.github.io/react/",
-        "tags": ["react", "browser"]
+        "description": "Javascript library for authoring of iOS & Android apps",
+        "topic": "react"
     }
-]
+}
