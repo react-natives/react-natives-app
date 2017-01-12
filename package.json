@@ -12,7 +12,9 @@
     "react": "15.3.2",
     "react-native": "0.37.0",
     "react-native-maps": "^0.11.0",
-    "react-native-router-flux": "^3.37.0"
+    "react-native-router-flux": "^3.37.0",
+    "react-redux": "^5.0.2",
+    "redux": "^3.6.0"
   },
   "jest": {
     "preset": "jest-react-native"
