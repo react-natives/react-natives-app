@@ -18,6 +18,7 @@ import {
 import { Actions } from 'react-native-router-flux';
 import events from '../../database/events.json';
 import moment from 'moment';
+import { connect } from 'react-redux';
 
 class List extends Component {
 
@@ -25,7 +26,7 @@ class List extends Component {
     super(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows(events),
+      dataSource: ds.cloneWithRows(props.events),
     };
     this._renderRow = this._renderRow.bind(this);
     this._pressRow = this._pressRow.bind(this);
@@ -141,4 +142,9 @@ styles.description =  {
 
 styles = StyleSheet.create(styles);
 
-export default List
+export default connect(
+    (state) => ({
+      events: state.events,
+      control: state.control
+    })
+)(List)
