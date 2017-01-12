@@ -15,35 +15,39 @@ import {
 import { Router, Scene } from 'react-native-router-flux';
 import Map from './meetups/map';
 import List from './meetups/list';
+import { Provider } from 'react-redux';
+import store from './stores';
 
 
 export class App extends Component {
 
     render() {
         return (
-            <View style={{flex:1}}>
-                <StatusBar barStyle="light-content"/>
-                <Router>
-                    <Scene key="root">
-                        <Scene
-                            navigationBarStyle={styles.navBar}
-                            backButtonImage={require('./../assets/back_chevron.png')}
-                            titleStyle={styles.navBarText}
-                            key="map"
-                            component={Map}
-                            title="Meetup Location"
-                        />
-                        <Scene
-                            navigationBarStyle={styles.navBar}
-                            titleStyle={styles.navBarText}
-                            key="list"
-                            component={List}
-                            title="Meetups"
-                            initial={true}
-                        />
-                    </Scene>
-                </Router>
-            </View>
+            <Provider store={store}>
+                <View style={{flex:1}}>
+                    <StatusBar barStyle="light-content"/>
+                    <Router>
+                        <Scene key="root">
+                            <Scene
+                                navigationBarStyle={styles.navBar}
+                                backButtonImage={require('./../assets/back_chevron.png')}
+                                titleStyle={styles.navBarText}
+                                key="map"
+                                component={Map}
+                                title="Meetup Location"
+                            />
+                            <Scene
+                                navigationBarStyle={styles.navBar}
+                                titleStyle={styles.navBarText}
+                                key="list"
+                                component={List}
+                                title="Meetups"
+                                initial={true}
+                            />
+                        </Scene>
+                    </Router>
+                </View>
+            </Provider>
         );
     }
 }
