@@ -5,8 +5,6 @@
  */
 
 import React, { Component } from 'react';
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
 import {
     AppRegistry,
     StyleSheet,
@@ -15,17 +13,14 @@ import {
     StatusBar
 } from 'react-native';
 import { Router, Scene } from 'react-native-router-flux';
-import rootReducer from './reducers/';
 import Map from './meetups/map';
 import List from './meetups/list';
 
-const store = createStore(rootReducer)
 
 export class App extends Component {
 
     render() {
         return (
-          <Provider store={store}>
             <View style={{flex:1}}>
                 <StatusBar barStyle="light-content"/>
                 <Router>
@@ -39,17 +34,16 @@ export class App extends Component {
                             title="Meetup Location"
                         />
                         <Scene
-                          navigationBarStyle={styles.navBar}
-                          titleStyle={styles.navBarText}
-                          key="list"
-                          component={List}
-                          title="Meetups"
-                          initial={true}
+                            navigationBarStyle={styles.navBar}
+                            titleStyle={styles.navBarText}
+                            key="list"
+                            component={List}
+                            title="Meetups"
+                            initial={true}
                         />
                     </Scene>
                 </Router>
             </View>
-          </Provider>
         );
     }
 }
