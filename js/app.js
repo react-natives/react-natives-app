@@ -15,9 +15,12 @@ import {
 import { Router, Scene } from 'react-native-router-flux';
 import Map from './meetups/map';
 import List from './meetups/list';
+import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import store from './stores';
 
+import * as reducers from './reducers';
+
+const store = createStore(combineReducers(reducers), {});
 
 export class App extends Component {
 

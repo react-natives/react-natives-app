@@ -1,16 +1,17 @@
-import events from '../../database/events.json'
+import eventsDatabase from '../../database/events.json'
 
-const initialState = events
+const initialState = eventsDatabase;
 
-export default (state = initialState, action) => {
-    alert(JSON.stringify(action));
-    let nextState = state;
+export default function(state = initialState, action = {}) {
+    let nextState = [...state];
     switch (action.type) {
         case 'DELETE_EVENT':
-            return nextState.events(action.index, 1);
+            nextState.splice(action.index, 1);
+            return nextState;
         case 'ADD_EVENT':
-            return nextState.push(action.event);
-        default:
-            return state;
+            nextState.push(action.event)
+            return nextState;
     }
+
+    return state
 }

@@ -1,10 +1,6 @@
-import { combineReducers } from 'redux';
-import eventsReducer from './events';
-import controlReducer from './control';
+import events from './events';
+import control from './control';
 
-const rootReducer = combineReducers({
-    events: eventsReducer,
-    control: controlReducer
-});
-
-export default rootReducer
+export {
+    events, control
+};

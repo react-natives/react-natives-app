@@ -4,9 +4,8 @@ const initialState = {
         'React Native Cologne']
 }
 
-export default (state = initialState, action) => {
-    alert(JSON.stringify(action));
-    let nextState = state;
+export default function(state = initialState, action) {
+    let nextState = {...state};
     switch(action.type) {
         case 'TOGGLE_VISIBILITY':
             if (nextState.visibleGroups.indexOf(action.group) >= 0) {
@@ -17,6 +16,6 @@ export default (state = initialState, action) => {
             }
             return nextState;
         default:
-            return state
+            return nextState;
     }
 }
