@@ -5,7 +5,6 @@
  */
 
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
 import {
   AppRegistry,
   StyleSheet,
@@ -13,11 +12,17 @@ import {
   View,
   ListView,
   TouchableHighlight,
+  Switch,
   Linking,
   Alert
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import events from '../../database/events.json';
 import moment from 'moment';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as controlActionCreators from '../actions/control.js';
+import * as eventsActionCreators from '../actions/events.js';
 
 class List extends Component {
 
@@ -25,7 +30,7 @@ class List extends Component {
     super(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows(props.events),
+      dataSource: ds.cloneWithRows(props.events)
     };
     this._renderRow = this._renderRow.bind(this);
     this._pressRow = this._pressRow.bind(this);
@@ -52,9 +57,16 @@ class List extends Component {
 
             </Text>
 
-<Text style={styles.description}>
+            <Text style={styles.description}>
                 {rowData.title}
             </Text>
+
+
+            <TouchableHighlight onPress={() => {
+              this.props.actions.deleteEvent(rowID);
+            }}>
+            <Text>DELETE</Text>
+            </TouchableHighlight>
 
           </View>
         </View>
@@ -72,6 +84,14 @@ class List extends Component {
           }}
     />
     );
+  };
+
+  componentWillReceiveProps(nextProps) {
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    const eventsFiltered = nextProps.events.filter((element) => {
+      return nextProps.control.visibleGroups.indexOf(element.group) >= 0;
+    });
+    this.setState({dataSource: ds.cloneWithRows(eventsFiltered)});
   }
 
   render() {
@@ -83,6 +103,26 @@ class List extends Component {
           renderRow={this._renderRow}
           renderSeparator={this._renderSeparator}
         />
+        <View>
+          <View>
+            <TouchableHighlight onPress={() => {
+            this.props.actions.addEvent();
+          }}>
+              <Text>ADD</Text>
+            </TouchableHighlight>
+          </View>
+          <Text>MUC</Text>
+          <Switch
+              onValueChange={() => {this.props.actions.toggleVisibility('React Native Munich')}}
+              style={{marginBottom: 10}}
+              value={this.props.control.visibleGroups.indexOf('React Native Munich') >= 0} />
+        </View>
+        <View>
+          <Text>CGN</Text>
+          <Switch
+              onValueChange={() => {this.props.actions.toggleVisibility('React Native Cologne')}}
+              value={(this.props.control.visibleGroups.indexOf('React Native Cologne') >= 0) ? true : false} />
+        </View>
       </View>
     );
   }
@@ -141,8 +181,16 @@ styles.description =  {
 
 styles = StyleSheet.create(styles);
 
-export default connect(
-  (state) => ({
-    events: state.events
-  })
-)(List)
+function mapStateToProps(state) {
+  console.log(state);
+  return {
+    events: state.events,
+    control: state.control
+  };
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators({...controlActionCreators, ...eventsActionCreators}, dispatch)
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(List)
