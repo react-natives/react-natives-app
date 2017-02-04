@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect, bindActionCreators } from 'react-redux'
 import {
   AppRegistry,
   StyleSheet,
@@ -25,7 +25,7 @@ class List extends Component {
     super(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows(props.events),
+      dataSource: ds.cloneWithRows(props.events)
     };
     this._renderRow = this._renderRow.bind(this);
     this._pressRow = this._pressRow.bind(this);
@@ -52,7 +52,7 @@ class List extends Component {
 
             </Text>
 
-<Text style={styles.description}>
+            <Text style={styles.description}>
                 {rowData.title}
             </Text>
 
@@ -62,7 +62,8 @@ class List extends Component {
     );
   }
 
-  _renderSeparator (sectionID: number, rowID: number, adjacentRowHighlighted: bool) {
+  _renderSeparator (sectionID: number, rowID: number, adjacentRowHighlighted: bool)
+  {
   return (
     <View key={`${sectionID}-${rowID}`}
           style={{
@@ -72,9 +73,19 @@ class List extends Component {
           }}
     />
     );
+  };
+
+  componentWillReceiveProps(nextProps)
+  {
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    const eventsFiltered = nextProps.events.filter((element) => {
+      return nextProps.control.visibleGroups.indexOf(element.group) >= 0;
+    });
+    this.setState({dataSource: ds.cloneWithRows(eventsFiltered)});
   }
 
-  render() {
+  render()
+  {
     return (
       <View style={styles.container}>
         <ListView
@@ -141,8 +152,16 @@ styles.description =  {
 
 styles = StyleSheet.create(styles);
 
-export default connect(
-  (state) => ({
+function mapStateToProps(state) {
+  return {
     events: state.events
-  })
-)(List)
+  };
+}
+
+/*
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators({...controlActionCreators, ...eventsActionCreators}, dispatch)
+})
+*/
+
+export default connect(mapStateToProps /*, mapDispatchToProps*/ )(List)

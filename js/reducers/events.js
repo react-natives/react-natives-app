@@ -1,7 +1,7 @@
-import events from '../../database/events.json'
+import eventsDatabase from '../../database/events.json'
 
-const initialState = events
+const initialState = eventsDatabase;
 
-export default (state = initialState, action) => {
-  return state
+export default function(state = initialState, action = {}) {
+    return state
 }
