@@ -1,14 +1,17 @@
 # About this directory
 This directory should contain all **redux** reducers used within this app. The index.js file of this directory should 
-export the rootReducer.
+export the combination of all reducers as rootReducer.
 
 ```javascript
 import { combineReducers } from 'redux';
 
-const reducers = {
-    reducerA: require('./reducer-a.js'),
-    reducerB: require('./reducer-b.js')
-};
+import reducerA from './a';
+import reducerB from './b';
 
-module.exports = combineReducers(reducers);
+const rootReducer = combineReducers({
+    a: reducerA,
+    b: reducerB
+});
+
+export default rootReducer
 ```

@@ -17,10 +17,9 @@ import Map from './meetups/map';
 import List from './meetups/list';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
+import rootReducer from './reducers/';
 
-import * as reducers from './reducers';
-
-const store = createStore(combineReducers(reducers), {});
+const store = createStore(rootReducer, {});
 
 export class App extends Component {
 
