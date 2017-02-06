@@ -13,6 +13,7 @@ import {
   View,
   ListView,
   TouchableHighlight,
+  RefreshControl,
   Linking,
   Alert
 } from 'react-native';
@@ -21,11 +22,16 @@ import moment from 'moment';
 
 class List extends Component {
 
+  static defaultProps = {
+    isRefreshing: false
+  };
+
   constructor(props) {
     super(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows(props.events)
+      dataSource: ds.cloneWithRows(props.events),
+      isRefreshing: this.props.isRefreshing
     };
     this._renderRow = this._renderRow.bind(this);
     this._pressRow = this._pressRow.bind(this);
@@ -75,6 +81,31 @@ class List extends Component {
     );
   };
 
+  fetchMeetupEvents = () => {
+    this.setState({isRefreshing: true});
+
+    return fetch(
+      'https://api.meetup.com/react-native-cologne/events?photo-host=public&page=20&sig_id=177774242&status=past&sig=4a281d534d54c2c723666fe79ce6d433ed17fbbb',
+      {
+        method: 'GET'
+      }
+    )
+    .then((response) => response.json())
+    .then((responseJson) => {
+      /*
+      this.setState({
+        annotations: responseJson.results[0].series[0].values
+      })
+      */
+      console.log(responseJson);
+      this.setState({isRefreshing: false});
+    })
+    .catch((error) => {
+      console.error(error);
+      this.setState({isRefreshing: false});
+    });
+  };
+
   componentWillReceiveProps(nextProps)
   {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -93,6 +124,12 @@ class List extends Component {
           dataSource={this.state.dataSource}
           renderRow={this._renderRow}
           renderSeparator={this._renderSeparator}
+          refreshControl={
+          <RefreshControl
+            refreshing={this.state.isRefreshing}
+            onRefresh={this.fetchMeetupEvents}
+          />
+        }
         />
       </View>
     );
