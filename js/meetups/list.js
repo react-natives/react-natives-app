@@ -19,6 +19,7 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import moment from 'moment';
+import meetupApiConfig from '../../config/meetup-api'
 
 class List extends Component {
 
@@ -85,7 +86,7 @@ class List extends Component {
     this.setState({isRefreshing: true});
 
     return fetch(
-      'https://api.meetup.com/react-native-cologne/events?photo-host=public&page=20&sig_id=177774242&status=past&sig=4a281d534d54c2c723666fe79ce6d433ed17fbbb',
+      meetupApiConfig.signedEventRequests[0].url,
       {
         method: 'GET'
       }
