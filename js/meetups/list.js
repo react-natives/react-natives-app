@@ -82,29 +82,31 @@ class List extends Component {
     );
   };
 
-  fetchMeetupEvents = () => {
-    this.setState({isRefreshing: true});
+checkDatabaseConnection = async () => {
+  try {
+    const response = await fetch('http://' + this.state.url + ':' + this.state.port + '/query?db=' + this.state.name + '&q=SHOW%20MEASUREMENTS');
+    const json = await response.json();
+    return json;
+  } catch(error) {
+    throw new InfluxExceptions.HostNotFoundException(error);
+  }
+}
 
-    return fetch(
-      meetupApiConfig.signedEventRequests[0].url,
-      {
-        method: 'GET'
-      }
-    )
-    .then((response) => response.json())
-    .then((responseJson) => {
-      /*
-      this.setState({
-        annotations: responseJson.results[0].series[0].values
-      })
-      */
-      console.log(responseJson);
+  fetchMeetupEvents = async() => {
+    try {
+      const response = await fetch(
+        meetupApiConfig.signedEventRequests[0].url,
+        {
+          method: 'GET'
+        }
+      );
+      const json = await response.json();
+      console.log(json);
       this.setState({isRefreshing: false});
-    })
-    .catch((error) => {
+    } catch (error) {
       console.error(error);
       this.setState({isRefreshing: false});
-    });
+    }
   };
 
   componentWillReceiveProps(nextProps)
