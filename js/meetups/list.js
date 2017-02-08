@@ -52,15 +52,15 @@ class List extends Component {
         <View style={{flexDirection: 'row', backgroundColor: 'white'}}>
           <View style={styles.row}>
             <Text style={styles.text}>
-              {moment(rowData.time).format('LL')}, {rowData.location.city}
+              {moment(rowData.time).format('LL')}, {rowData.venue.city}
             </Text>
             <Text style={styles.title}>
-                {rowData.group}
+                {rowData.group.name}
 
             </Text>
 
             <Text style={styles.description}>
-                {rowData.title}
+                {rowData.name}
             </Text>
 
           </View>
@@ -92,30 +92,30 @@ checkDatabaseConnection = async () => {
   }
 }
 
-  fetchMeetupEvents = async() => {
-    try {
-      const response = await fetch(
-        meetupApiConfig.signedEventRequests[0].url,
-        {
-          method: 'GET'
-        }
-      );
-      const json = await response.json();
-      console.log(json);
-      this.setState({isRefreshing: false});
-    } catch (error) {
-      console.error(error);
-      this.setState({isRefreshing: false});
-    }
+  fetchMeetupEvents = () => {
+    meetupApiConfig.signedEventRequests.map(async(signedEventRequest) => {
+      try {
+        console.log(signedEventRequest.url);
+        const response = await fetch(
+            signedEventRequest.url,
+            {
+              method: 'GET'
+            }
+        );
+        const json = await response.json();
+        console.log(json);
+        this.setState({isRefreshing: false});
+      } catch (error) {
+        console.error(error);
+        this.setState({isRefreshing: false});
+      }
+    })
   };
 
   componentWillReceiveProps(nextProps)
   {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    const eventsFiltered = nextProps.events.filter((element) => {
-      return nextProps.control.visibleGroups.indexOf(element.group) >= 0;
-    });
-    this.setState({dataSource: ds.cloneWithRows(eventsFiltered)});
+    this.setState({dataSource: ds.cloneWithRows(nextProps.events)});
   }
 
   render()
