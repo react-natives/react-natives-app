@@ -38,15 +38,18 @@ class List extends Component {
     this._pressRow = this._pressRow.bind(this);
   }
 
-  _pressRow(rowID: number) {
-    Actions.map();
+  _pressRow(rowData) {
+    Actions.map({
+      longitude: rowData.venue.lon,
+      latitude: rowData.venue.lat
+    });
   }
 
   _renderRow(rowData: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
     let rowHash = Math.abs(hashCode(rowData));
     return (
       <TouchableHighlight onPress={() => {
-          this._pressRow(rowID);
+          this._pressRow(rowData);
           //highlightRow(sectionID, rowID);
       }}>
         <View style={{flexDirection: 'row', backgroundColor: 'white'}}>

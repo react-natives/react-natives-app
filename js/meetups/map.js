@@ -22,7 +22,7 @@ const person = {
 
 export default class Map extends Component {
   render() {
-    const latitude = 48.1368369, longitude = 11.523603;
+    const latitude = this.props.latitude, longitude = this.props.longitude;
     return (
       <View style={styles.container}>
         <MapView
