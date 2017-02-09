@@ -1,0 +1,75 @@
+[
+    {
+        created:1475756055000,
+        id:'234666510',
+        name:'React Native Take-off: Getting to know technology & peers',
+        status:'past',
+        time:1477587600000,
+        updated:1477648019000,
+        utc_offset:7200000,
+        waitlist_count:0,
+        yes_rsvp_count:19,
+        venue:{
+            id:24830174,
+            name:'InTradeSys',
+            lat:50.934017181396484,
+            lon:7.011035919189453,
+            repinned:false,
+            address_1:'Dillenburgerstr. 75',
+            city:'Köln',
+            country:'de',
+            localized_country_name:'Germany'
+        },
+        group:{
+            created:1475754845000,
+            name:'React Native Cologne',
+            id:20624763,
+            join_mode:'open',
+            lat:50.95000076293945,
+            lon:6.96999979019165,
+            urlname:'React-Native-Cologne',
+            who:'App Developers'
+        },
+        link:'https://www.meetup.com/React-Native-Cologne/events/234666510/',
+        description:'<p>Overview of the state of the art, getting hands on with react native, getting to know your peers and building teams</p> ',
+        visibility:'public'
+    },
+    {
+        created:1482312603000,
+        duration:14400000,
+        id:'236372249',
+        name:'Managing state in React-Native - An introduction to Redux',
+        rsvp_limit:40,
+        status:'past',
+        time:1484329500000,
+        updated:1484729220000,
+        utc_offset:3600000,
+        waitlist_count:0,
+        yes_rsvp_count:32,
+        venue:{
+            id:24953942,
+            name:'SilverTours GmbH',
+            lat:50.94266891479492,
+            lon:6.956708908081055,
+            repinned:false,
+            address_1:'Dompropst-Ketzer-Straße 1-9',
+            city:'Köln',
+            country:'de',
+            localized_country_name:'Germany'
+        },
+        group:{
+            created:1475754845000,
+            name:'React Native Cologne',
+            id:20624763,
+            join_mode:'open',
+            lat:50.95000076293945,
+            lon:6.96999979019165,
+            urlname:'React-Native-Cologne',
+            who:'App Developers'
+        },
+        link:'https://www.meetup.com/React-Native-Cologne/events/236372249/',
+        description:'<p>Hello everyone, </p> <p><br/>we are happy to invite you to our 2nd Meetup of the React-Native User Group Cologne. Besides some food &amp; drinks, there will be an interesting topic: Managing your app state in React-Native.</p> <p><br/>For this Meetup, we are pleased to welcome Thomas Tränkler for this evening.</p> <p>Schedule: <br/>at 7:00 p.m.: Doors open and Get Together <br/>at 7:30 p.m.:<a href="https://twitter.com/mpdude_de?lang=de"> </a>Thomas Tränkler <b>|  Partnership with React Native Munich</b><br/>at 7:50 p.m.: Thomas Kolar <b>| Managing state in React-Native</b><br/>at 8:20 p.m. Thomas Kolar &amp; Pierre Dedy <b>| Redux - Would you like to know more?</b></p> <p><b>Topic:  Partnership with React Native Munich</b></p> <p>Thomas Tränkler will discuss the future collaboration of the Cologne and Munich React Native Meetup groups - sharing interesting talks &amp; workshops.</p> <p><b>Topic: Managing state in React-Native</b></p> <p>Thomas Kolar will focus on managing state in React-Native apps. After a brief description of the topic he will dive into an example implementation with Redux.</p> <p><b>Topic: Redux - Would you like to know more?<br/></b></p> <p>&lt;a href="https://twitter.com/mpdude_de?lang=de"&gt;&lt;/a&gt;</p> <p>Thomas Kolar and Pierre Dedy will talk about some more in-depth topics regarding Redux and its eco-system, mainly middlewares like Thunks, Sagas and Persistence Layers as well as Immutable.js</p> <p>All talks will be held in English</p> <p><br/>We are looking forward to welcome you all to our first React Native User Group Cologne Meetup in 2017!</p> <p>See you!</p> <p>Your React-Natives User Group Organization Team</p> ',
+        how_to_find_us:'We are located on the 6th floor of the ROLEX building next to Cologne central station. The buildings entrance will be closed after 6:00 p.m. you need to give us a short phone call and then we will pick you up - 0179/1360985.',
+        visibility:'public'
+    }
+]
