@@ -1,1 +1,1 @@
-//export const SOME_ACTION = 'SOME_ACTION'
+export const ADD_EVENTS = 'ADD_EVENTS';

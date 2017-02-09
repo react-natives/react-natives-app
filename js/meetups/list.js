@@ -5,7 +5,8 @@
  */
 
 import React, { Component } from 'react';
-import { connect, bindActionCreators } from 'react-redux'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
 import {
   AppRegistry,
   StyleSheet,
@@ -20,6 +21,7 @@ import {
 import { Actions } from 'react-native-router-flux';
 import moment from 'moment';
 import meetupApiConfig from '../../config/meetup-api'
+import * as eventActionCreators from '../actions/events'
 
 class List extends Component {
 
@@ -85,20 +87,9 @@ class List extends Component {
     );
   };
 
-checkDatabaseConnection = async () => {
-  try {
-    const response = await fetch('http://' + this.state.url + ':' + this.state.port + '/query?db=' + this.state.name + '&q=SHOW%20MEASUREMENTS');
-    const json = await response.json();
-    return json;
-  } catch(error) {
-    throw new InfluxExceptions.HostNotFoundException(error);
-  }
-}
-
   fetchMeetupEvents = () => {
     meetupApiConfig.signedEventRequests.map(async(signedEventRequest) => {
       try {
-        console.log(signedEventRequest.url);
         const response = await fetch(
             signedEventRequest.url,
             {
@@ -106,7 +97,7 @@ checkDatabaseConnection = async () => {
             }
         );
         const json = await response.json();
-        console.log(json);
+        this.props.eventActions.addEvents(json);
         this.setState({isRefreshing: false});
       } catch (error) {
         console.error(error);
@@ -201,10 +192,10 @@ function mapStateToProps(state) {
   };
 }
 
-/*
-const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators({...controlActionCreators, ...eventsActionCreators}, dispatch)
-})
-*/
+function mapDispatchToProps(dispatch) {
+  return {
+    eventActions: bindActionCreators(eventActionCreators, dispatch)
+  }
+}
 
-export default connect(mapStateToProps /*, mapDispatchToProps*/ )(List)
+export default connect(mapStateToProps, mapDispatchToProps)(List)
