@@ -5,7 +5,8 @@
  */
 
 import React, { Component } from 'react';
-import { connect, bindActionCreators } from 'react-redux'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
 import {
   AppRegistry,
   StyleSheet,
@@ -13,47 +14,58 @@ import {
   View,
   ListView,
   TouchableHighlight,
+  RefreshControl,
   Linking,
   Alert
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import moment from 'moment';
+import meetupApiConfig from '../../config/meetup-api'
+import * as eventActionCreators from '../actions/events'
 
 class List extends Component {
+
+  static defaultProps = {
+    isRefreshing: false
+  };
 
   constructor(props) {
     super(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows(props.events)
+      dataSource: ds.cloneWithRows(props.events),
+      isRefreshing: this.props.isRefreshing
     };
     this._renderRow = this._renderRow.bind(this);
     this._pressRow = this._pressRow.bind(this);
   }
 
-  _pressRow(rowID: number) {
-    Actions.map();
+  _pressRow(rowData) {
+    Actions.map({
+      longitude: rowData.venue.lon,
+      latitude: rowData.venue.lat
+    });
   }
 
   _renderRow(rowData: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
     let rowHash = Math.abs(hashCode(rowData));
     return (
       <TouchableHighlight onPress={() => {
-          this._pressRow(rowID);
+          this._pressRow(rowData);
           //highlightRow(sectionID, rowID);
       }}>
         <View style={{flexDirection: 'row', backgroundColor: 'white'}}>
           <View style={styles.row}>
             <Text style={styles.text}>
-              {moment(rowData.time).format('LL')}, {rowData.location.city}
+              {moment(rowData.time).format('LL')}, {rowData.venue.city}
             </Text>
             <Text style={styles.title}>
-                {rowData.group}
+                {rowData.group.name}
 
             </Text>
 
             <Text style={styles.description}>
-                {rowData.title}
+                {rowData.name}
             </Text>
 
           </View>
@@ -75,13 +87,29 @@ class List extends Component {
     );
   };
 
+  fetchMeetupEvents = () => {
+    meetupApiConfig.signedEventRequests.map(async(signedEventRequest) => {
+      try {
+        const response = await fetch(
+            signedEventRequest.url,
+            {
+              method: 'GET'
+            }
+        );
+        const json = await response.json();
+        this.props.eventActions.addEvents(json);
+        this.setState({isRefreshing: false});
+      } catch (error) {
+        console.error(error);
+        this.setState({isRefreshing: false});
+      }
+    })
+  };
+
   componentWillReceiveProps(nextProps)
   {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    const eventsFiltered = nextProps.events.filter((element) => {
-      return nextProps.control.visibleGroups.indexOf(element.group) >= 0;
-    });
-    this.setState({dataSource: ds.cloneWithRows(eventsFiltered)});
+    this.setState({dataSource: ds.cloneWithRows(nextProps.events)});
   }
 
   render()
@@ -93,6 +121,12 @@ class List extends Component {
           dataSource={this.state.dataSource}
           renderRow={this._renderRow}
           renderSeparator={this._renderSeparator}
+          refreshControl={
+          <RefreshControl
+            refreshing={this.state.isRefreshing}
+            onRefresh={this.fetchMeetupEvents}
+          />
+        }
         />
       </View>
     );
@@ -158,10 +192,10 @@ function mapStateToProps(state) {
   };
 }
 
-/*
-const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators({...controlActionCreators, ...eventsActionCreators}, dispatch)
-})
-*/
+function mapDispatchToProps(dispatch) {
+  return {
+    eventActions: bindActionCreators(eventActionCreators, dispatch)
+  }
+}
 
-export default connect(mapStateToProps /*, mapDispatchToProps*/ )(List)
+export default connect(mapStateToProps, mapDispatchToProps)(List)
