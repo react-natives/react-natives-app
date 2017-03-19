@@ -12,7 +12,7 @@ import {
     View,
     StatusBar
 } from 'react-native';
-import { Router, Scene } from 'react-native-router-flux';
+import { StackNavigator } from 'react-navigation';
 import Map from './meetups/map';
 import List from './meetups/list';
 import { createStore, combineReducers } from 'redux';
@@ -21,6 +21,22 @@ import rootReducer from './reducers/';
 
 const store = createStore(rootReducer, {});
 
+const Router = StackNavigator({
+        List: { screen: List },
+        Map: { screen: Map },
+    },
+    {
+        navigationOptions: {
+            header: {
+                style:{
+                    backgroundColor: '#5555FF'
+                },
+                tintColor: 'white'
+            }
+        }
+    }
+)
+
 export class App extends Component {
 
     render() {
@@ -28,26 +44,7 @@ export class App extends Component {
             <Provider store={store}>
                 <View style={{flex:1}}>
                     <StatusBar barStyle="light-content"/>
-                    <Router>
-                        <Scene key="root">
-                            <Scene
-                                navigationBarStyle={styles.navBar}
-                                backButtonImage={require('./../assets/back_chevron.png')}
-                                titleStyle={styles.navBarText}
-                                key="map"
-                                component={Map}
-                                title="Meetup Location"
-                            />
-                            <Scene
-                                navigationBarStyle={styles.navBar}
-                                titleStyle={styles.navBarText}
-                                key="list"
-                                component={List}
-                                title="Meetups"
-                                initial={true}
-                            />
-                        </Scene>
-                    </Router>
+                    <Router/>
                 </View>
             </Provider>
         );

@@ -21,8 +21,13 @@ const person = {
 }
 
 export default class Map extends Component {
+
+  static navigationOptions = {
+    title : 'Meetup Locations'
+  }
+
   render() {
-    const latitude = this.props.latitude, longitude = this.props.longitude;
+    const {longitude, latitude}  = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
         <MapView

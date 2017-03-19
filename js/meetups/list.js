@@ -18,12 +18,15 @@ import {
   Linking,
   Alert
 } from 'react-native';
-import { Actions } from 'react-native-router-flux';
 import moment from 'moment';
 import meetupApiConfig from '../../config/meetup-api'
 import * as eventActionCreators from '../actions/events'
 
 class List extends Component {
+
+  static navigationOptions = {
+    title : 'Meetups'
+  }
 
   static defaultProps = {
     isRefreshing: false
@@ -41,10 +44,10 @@ class List extends Component {
   }
 
   _pressRow(rowData) {
-    Actions.map({
+    this.props.navigation.navigate('Map', {
       longitude: rowData.venue.lon,
       latitude: rowData.venue.lat
-    });
+    })
   }
 
   _renderRow(rowData: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
@@ -149,7 +152,7 @@ let styles = {
     justifyContent: 'flex-end',
     flex: 1,
     backgroundColor: 'white',
-    marginTop: 63,
+    //marginTop: 63,
   },
   title: {
     fontSize: 14,
