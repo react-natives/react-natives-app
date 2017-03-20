@@ -4,7 +4,7 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   AppRegistry,
   StyleSheet,
@@ -12,22 +12,21 @@ import {
   View,
   Linking,
   TouchableOpacity
-} from 'react-native';
-import MapView from 'react-native-maps';
+} from "react-native";
+import MapView from "react-native-maps";
 
 const person = {
   firstName: "Thomas",
-  lastName: "Tränkler" 
-}
+  lastName: "Tränkler"
+};
 
 export default class Map extends Component {
-
   static navigationOptions = {
-    title : 'Meetup Locations'
-  }
+    title: "Meetup Locations"
+  };
 
   render() {
-    const {longitude, latitude}  = this.props.navigation.state.params;
+    const { longitude, latitude } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
         <MapView
@@ -36,20 +35,30 @@ export default class Map extends Component {
             latitude,
             longitude,
             latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-          }}>
+            longitudeDelta: 0.0421
+          }}
+        >
           <MapView.Marker
             coordinate={{
               latitude,
-              longitude,
+              longitude
             }}
             centerOffset={{ x: -18, y: -60 }}
             anchor={{ x: 0.69, y: 1 }}
           />
         </MapView>
-        <TouchableOpacity onPress={() => Linking.openURL('http://maps.apple.com/?ll=48.1368369,11.523603')} style={{backgroundColor: '#5555FF', borderRadius: 10, opacity: 1, margin: 20}}>
+        <TouchableOpacity
+          onPress={() =>
+            Linking.openURL("http://maps.apple.com/?ll=48.1368369,11.523603")}
+          style={{
+            backgroundColor: "#5555FF",
+            borderRadius: 10,
+            opacity: 1,
+            margin: 20
+          }}
+        >
           <Text style={styles.textBold}>
-            <Text style={styles.text}>> Take me to the </Text>Meetup
+            <Text style={styles.text}>&gt; Take me to the </Text>Meetup
           </Text>
         </TouchableOpacity>
       </View>
@@ -60,28 +69,27 @@ export default class Map extends Component {
 let styles = {
   container: {
     ...StyleSheet.absoluteFillObject,
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
     flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    alignItems: "center",
+    backgroundColor: "#F5FCFF"
   },
   text: {
     fontSize: 20,
-    fontWeight: 'normal',
-    color: 'white',
-    textAlign: 'center',
+    fontWeight: "normal",
+    color: "white",
+    textAlign: "center",
     margin: 10,
-    backgroundColor: 'transparent'
+    backgroundColor: "transparent"
   },
   map: {
-    ...StyleSheet.absoluteFillObject,
-  },
+    ...StyleSheet.absoluteFillObject
+  }
 };
 
 styles.textBold = {
   ...styles.text,
-  fontWeight: 'bold'
+  fontWeight: "bold"
 };
 
 styles = StyleSheet.create(styles);
-

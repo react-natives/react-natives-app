@@ -1,9 +1,9 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 
-import eventsReducer from './events';
+import eventsReducer from "./events";
 
 const rootReducer = combineReducers({
-    events: eventsReducer
+  events: eventsReducer
 });
 
-export default rootReducer
+export default rootReducer;

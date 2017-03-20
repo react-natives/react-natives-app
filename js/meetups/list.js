@@ -4,9 +4,9 @@
  * @flow
  */
 
-import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import {
   AppRegistry,
   StyleSheet,
@@ -17,16 +17,15 @@ import {
   RefreshControl,
   Linking,
   Alert
-} from 'react-native';
-import moment from 'moment';
-import meetupApiConfig from '../../config/meetup-api'
-import * as eventActionCreators from '../actions/events'
+} from "react-native";
+import moment from "moment";
+import meetupApiConfig from "../../config/meetup-api";
+import * as eventActionCreators from "../actions/events";
 
 class List extends Component {
-
   static navigationOptions = {
-    title : 'Meetups'
-  }
+    title: "Meetups"
+  };
 
   static defaultProps = {
     isRefreshing: false
@@ -34,7 +33,9 @@ class List extends Component {
 
   constructor(props) {
     super(props);
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    const ds = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2
+    });
     this.state = {
       dataSource: ds.cloneWithRows(props.events),
       isRefreshing: this.props.isRefreshing
@@ -44,31 +45,38 @@ class List extends Component {
   }
 
   _pressRow(rowData) {
-    this.props.navigation.navigate('Map', {
+    this.props.navigation.navigate("Map", {
       longitude: rowData.venue.lon,
       latitude: rowData.venue.lat
-    })
+    });
   }
 
-  _renderRow(rowData: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
+  _renderRow(
+    rowData: string,
+    sectionID: number,
+    rowID: number,
+    highlightRow: (sectionID: number, rowID: number) => void
+  ) {
     let rowHash = Math.abs(hashCode(rowData));
     return (
-      <TouchableHighlight onPress={() => {
+      <TouchableHighlight
+        onPress={() => {
           this._pressRow(rowData);
           //highlightRow(sectionID, rowID);
-      }}>
-        <View style={{flexDirection: 'row', backgroundColor: 'white'}}>
+        }}
+      >
+        <View style={{ flexDirection: "row", backgroundColor: "white" }}>
           <View style={styles.row}>
             <Text style={styles.text}>
-              {moment(rowData.time).format('LL')}, {rowData.venue.city}
+              {moment(rowData.time).format("LL")}, {rowData.venue.city}
             </Text>
             <Text style={styles.title}>
-                {rowData.group.name}
+              {rowData.group.name}
 
             </Text>
 
             <Text style={styles.description}>
-                {rowData.name}
+              {rowData.name}
             </Text>
 
           </View>
@@ -77,59 +85,60 @@ class List extends Component {
     );
   }
 
-  _renderSeparator (sectionID: number, rowID: number, adjacentRowHighlighted: bool)
-  {
-  return (
-    <View key={`${sectionID}-${rowID}`}
-          style={{
-            height: adjacentRowHighlighted ? 4 : 1,
-            backgroundColor: adjacentRowHighlighted ? '#3B5998' : '#CCCCCC',
-            marginLeft: 15
-          }}
-    />
+  _renderSeparator(
+    sectionID: number,
+    rowID: number,
+    adjacentRowHighlighted: boolean
+  ) {
+    return (
+      <View
+        key={`${sectionID}-${rowID}`}
+        style={{
+          height: adjacentRowHighlighted ? 4 : 1,
+          backgroundColor: adjacentRowHighlighted ? "#3B5998" : "#CCCCCC",
+          marginLeft: 15
+        }}
+      />
     );
-  };
-
-  fetchMeetupEvents = () => {
-    meetupApiConfig.signedEventRequests.map(async(signedEventRequest) => {
-      try {
-        const response = await fetch(
-            signedEventRequest.url,
-            {
-              method: 'GET'
-            }
-        );
-        const json = await response.json();
-        this.props.eventActions.addEvents(json);
-        this.setState({isRefreshing: false});
-      } catch (error) {
-        console.error(error);
-        this.setState({isRefreshing: false});
-      }
-    })
-  };
-
-  componentWillReceiveProps(nextProps)
-  {
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    this.setState({dataSource: ds.cloneWithRows(nextProps.events)});
   }
 
-  render()
-  {
+  fetchMeetupEvents = () => {
+    meetupApiConfig.signedEventRequests.map(async signedEventRequest => {
+      try {
+        const response = await fetch(signedEventRequest.url, {
+          method: "GET"
+        });
+        const json = await response.json();
+        this.props.eventActions.addEvents(json);
+        this.setState({ isRefreshing: false });
+      } catch (error) {
+        console.error(error);
+        this.setState({ isRefreshing: false });
+      }
+    });
+  };
+
+  componentWillReceiveProps(nextProps) {
+    const ds = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2
+    });
+    this.setState({ dataSource: ds.cloneWithRows(nextProps.events) });
+  }
+
+  render() {
     return (
       <View style={styles.container}>
         <ListView
-          style={{flex:1}}
+          style={{ flex: 1 }}
           dataSource={this.state.dataSource}
           renderRow={this._renderRow}
           renderSeparator={this._renderSeparator}
           refreshControl={
-          <RefreshControl
-            refreshing={this.state.isRefreshing}
-            onRefresh={this.fetchMeetupEvents}
-          />
-        }
+            <RefreshControl
+              refreshing={this.state.isRefreshing}
+              onRefresh={this.fetchMeetupEvents}
+            />
+          }
         />
       </View>
     );
@@ -138,53 +147,52 @@ class List extends Component {
 
 /* eslint no-bitwise: 0 */
 let hashCode = function(str) {
-  let  hash = 15;
+  let hash = 15;
   for (let ii = str.length - 1; ii >= 0; ii--) {
-    hash = ((hash << 5) - hash) + str.charCodeAt(ii);
+    hash = (hash << 5) - hash + str.charCodeAt(ii);
   }
   return hash;
 };
 
-
 let styles = {
   container: {
     //...StyleSheet.absoluteFillObject,
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: "white"
     //marginTop: 63,
   },
   title: {
     fontSize: 14,
-    fontWeight: 'bold',
-    textAlign: 'left',
+    fontWeight: "bold",
+    textAlign: "left",
     margin: 3,
-    color: 'black',
-    backgroundColor: 'transparent'
+    color: "black",
+    backgroundColor: "transparent"
   },
   text: {
     fontSize: 12,
-    fontWeight: 'normal',
-    textAlign: 'left',
+    fontWeight: "normal",
+    textAlign: "left",
     margin: 3,
-    color: 'gray',
-    backgroundColor: 'transparent'
+    color: "gray",
+    backgroundColor: "transparent"
   },
   map: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFillObject
   },
   row: {
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
+    flexDirection: "column",
+    justifyContent: "flex-start",
     padding: 15,
-    backgroundColor: 'white',
-  },
+    backgroundColor: "white"
+  }
 };
 
-styles.description =  {
+styles.description = {
   ...styles.text,
   fontSize: 14,
-  color: 'black'
+  color: "black"
 };
 
 styles = StyleSheet.create(styles);
@@ -198,7 +206,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     eventActions: bindActionCreators(eventActionCreators, dispatch)
-  }
+  };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(List)
+export default connect(mapStateToProps, mapDispatchToProps)(List);
