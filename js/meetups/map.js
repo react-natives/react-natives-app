@@ -22,7 +22,7 @@ const person = {
 
 export default class Map extends Component {
   static navigationOptions = {
-    title: "Meetup Locations"
+    title: "Locations"
   };
 
   render() {
