@@ -7,11 +7,12 @@
 import React, { Component } from "react";
 import { AppRegistry, StyleSheet, Text, View, StatusBar } from "react-native";
 import { StackNavigator } from "react-navigation";
-import Map from "./meetups/map";
-import List from "./meetups/list";
 import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
-import rootReducer from "./reducers/";
+
+import Map from "./js/meetups/map";
+import List from "./js/meetups/list";
+import rootReducer from "./js/reducers/";
 
 const store = createStore(rootReducer, {});
 
@@ -32,7 +33,7 @@ const Router = StackNavigator(
   }
 );
 
-export class App extends Component {
+export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
@@ -63,4 +64,4 @@ let styles = {
 };
 
 styles = StyleSheet.create(styles);
-AppRegistry.registerComponent("ReactNatives", () => App);
+//AppRegistry.registerComponent("ReactNatives", () => App);

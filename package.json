@@ -1,30 +1,33 @@
 {
-  "name": "ReactNatives",
-  "version": "0.0.1",
+  "name": "react-natives-app",
+  "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "start:ios": "node node_modules/react-native/local-cli/cli.js run-ios",
-    "test": "jest"
+  "devDependencies": {
+    "jest-expo": "^0.3.0",
+    "prettier": "^0.22.0",
+    "react-native-scripts": "0.0.25",
+    "react-test-renderer": "~15.4.1"
   },
-  "dependencies": {
-    "moment": "^2.17.0",
-    "react": "15.3.2",
-    "react-native": "0.37.0",
-    "react-native-maps": "^0.11.0",
-    "react-navigation": "^1.0.0-beta.7",
-    "react-redux": "^5.0.2",
-    "redux": "^3.6.0"
+  "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
+  "scripts": {
+    "start": "react-native-scripts start",
+    "eject": "react-native-scripts eject",
+    "android": "react-native-scripts android",
+    "ios": "react-native-scripts ios",
+    "test": "node node_modules/jest/bin/jest.js --watch"
   },
   "jest": {
-    "preset": "jest-react-native"
+    "preset": "jest-expo"
   },
-  "devDependencies": {
-    "babel-jest": "17.0.0",
-    "babel-preset-react-native": "1.9.0",
-    "jest": "17.0.0",
-    "jest-react-native": "17.0.0",
-    "prettier": "^0.22.0",
-    "react-test-renderer": "15.3.2"
+  "dependencies": {
+    "expo": "^15.1.0",
+    "moment": "^2.18.1",
+    "react": "~15.4.0",
+    "react-native": "0.42.3",
+    "react-native-maps": "^0.13.1",
+    "react-navigation": "^1.0.0-beta.7",
+    "react-redux": "^5.0.3",
+    "redux": "^3.6.0",
+    "redux-persist": "^4.5.0"
   }
 }
