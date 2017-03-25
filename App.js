@@ -5,16 +5,36 @@
  */
 
 import React, { Component } from "react";
-import { AppRegistry, StyleSheet, Text, View, StatusBar } from "react-native";
+import {
+  AppRegistry,
+  StyleSheet,
+  Text,
+  View,
+  StatusBar,
+  AsyncStorage
+} from "react-native";
 import { StackNavigator } from "react-navigation";
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
+import { persistStore, autoRehydrate } from "redux-persist";
+import { composeWithDevTools } from "redux-devtools-extension";
+import logger from "redux-logger";
 
 import Map from "./js/meetups/map";
 import List from "./js/meetups/list";
-import rootReducer from "./js/reducers/";
+import reducer from "./js/reducers/";
 
-const store = createStore(rootReducer, {});
+const composeEnhancers = composeWithDevTools(
+  {
+    // Specify here name, actionsBlacklist, actionsCreators and other options if needed
+  }
+);
+const store = createStore(
+  reducer,
+  /* preloadedState, */
+  composeEnhancers(applyMiddleware(logger), autoRehydrate())
+);
+persistStore(store, { storage: AsyncStorage });
 
 const Router = StackNavigator(
   {

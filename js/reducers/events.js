@@ -1,7 +1,7 @@
-import eventsDatabase from "../../database/events.json";
+//import eventsDatabase from "../../database/events.json";
 import { ADD_EVENTS } from "../constants/action-types";
 
-const initialState = eventsDatabase;
+const initialState = {}; //eventsDatabase;
 
 export default function(state = initialState, action = {}) {
   switch (action.type) {

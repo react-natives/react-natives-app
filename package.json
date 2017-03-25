@@ -6,7 +6,9 @@
     "jest-expo": "^0.3.0",
     "prettier": "^0.22.0",
     "react-native-scripts": "0.0.25",
-    "react-test-renderer": "~15.4.1"
+    "react-test-renderer": "~15.4.1",
+    "redux-devtools-extension": "^2.13.0",
+    "redux-logger": "^3.0.0"
   },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {

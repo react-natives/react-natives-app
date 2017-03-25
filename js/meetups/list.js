@@ -131,6 +131,7 @@ class List extends Component {
         <ListView
           style={{ flex: 1 }}
           dataSource={this.state.dataSource}
+          enableEmptySections={true}
           renderRow={this._renderRow}
           renderSeparator={this._renderSeparator}
           refreshControl={
