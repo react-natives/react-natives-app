@@ -22,6 +22,7 @@ import logger from "redux-logger";
 
 import Map from "./js/meetups/map";
 import List from "./js/meetups/list";
+import Videos from "./js/meetups/videos";
 import reducer from "./js/reducers/";
 
 const composeEnhancers = composeWithDevTools(
@@ -39,7 +40,8 @@ persistStore(store, { storage: AsyncStorage });
 const Router = StackNavigator(
   {
     List: { screen: List },
-    Map: { screen: Map }
+    Map: { screen: Map },
+    Videos: { screen: Videos }
   },
   {
     navigationOptions: {
