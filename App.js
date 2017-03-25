@@ -17,7 +17,7 @@ import { StackNavigator } from "react-navigation";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import { persistStore, autoRehydrate } from "redux-persist";
-import { composeWithDevTools } from "redux-devtools-extension";
+import { composeWithDevTools } from "remote-redux-devtools";
 import logger from "redux-logger";
 
 import Map from "./js/meetups/map";
