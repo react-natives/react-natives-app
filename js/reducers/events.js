@@ -5,7 +5,7 @@ const initialState = {}; //eventsDatabase;
 
 export default function(state = initialState, action = {}) {
   switch (action.type) {
-    case ADD_EVENTS:
+    case ADD_EVENTS: {
       const allEvents = [...state, ...action.events];
 
       let sortOrder = [];
@@ -29,6 +29,7 @@ export default function(state = initialState, action = {}) {
       });
 
       return nextState;
+    }
   }
   return state;
 }

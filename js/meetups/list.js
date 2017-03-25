@@ -8,21 +8,25 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
-  AppRegistry,
   StyleSheet,
   Text,
   View,
   ListView,
   TouchableHighlight,
-  RefreshControl,
-  Linking,
-  Alert
+  RefreshControl
 } from "react-native";
 import moment from "moment";
 import meetupApiConfig from "../../config/meetup-api";
 import * as eventActionCreators from "../actions/events";
 
 class List extends Component {
+  props: {
+    events: Object,
+    eventActions: Object,
+    isRefreshing: boolean,
+    navigation: Object
+  };
+
   static navigationOptions = {
     title: "Meetups"
   };
@@ -51,13 +55,7 @@ class List extends Component {
     });
   }
 
-  _renderRow(
-    rowData: string,
-    sectionID: number,
-    rowID: number,
-    highlightRow: (sectionID: number, rowID: number) => void
-  ) {
-    let rowHash = Math.abs(hashCode(rowData));
+  _renderRow(rowData: string, sectionID: number) {
     return (
       <TouchableHighlight
         onPress={() => {
@@ -145,15 +143,6 @@ class List extends Component {
     );
   }
 }
-
-/* eslint no-bitwise: 0 */
-let hashCode = function(str) {
-  let hash = 15;
-  for (let ii = str.length - 1; ii >= 0; ii--) {
-    hash = (hash << 5) - hash + str.charCodeAt(ii);
-  }
-  return hash;
-};
 
 let styles = {
   container: {

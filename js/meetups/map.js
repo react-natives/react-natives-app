@@ -6,7 +6,6 @@
 
 import React, { Component } from "react";
 import {
-  AppRegistry,
   StyleSheet,
   Text,
   View,
@@ -15,12 +14,11 @@ import {
 } from "react-native";
 import MapView from "react-native-maps";
 
-const person = {
-  firstName: "Thomas",
-  lastName: "Tränkler"
-};
-
 export default class Map extends Component {
+  props: {
+    navigation: Object
+  };
+
   static navigationOptions = {
     title: "Locations"
   };

@@ -5,16 +5,9 @@
  */
 
 import React, { Component } from "react";
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  StatusBar,
-  AsyncStorage
-} from "react-native";
+import { StyleSheet, View, StatusBar, AsyncStorage } from "react-native";
 import { StackNavigator } from "react-navigation";
-import { createStore, combineReducers, applyMiddleware } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import { persistStore, autoRehydrate } from "redux-persist";
 import { composeWithDevTools } from "remote-redux-devtools";
@@ -59,7 +52,7 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <View style={{ flex: 1 }}>
+        <View style={styles.flex}>
           <StatusBar barStyle="light-content" />
           <Router />
         </View>
@@ -69,6 +62,9 @@ export default class App extends Component {
 }
 
 let styles = {
+  flex: {
+    flex: 1
+  },
   container: {
     ...StyleSheet.absoluteFillObject,
     justifyContent: "flex-end",
@@ -86,4 +82,3 @@ let styles = {
 };
 
 styles = StyleSheet.create(styles);
-//AppRegistry.registerComponent("ReactNatives", () => App);
