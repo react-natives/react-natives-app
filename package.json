@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "enzyme": "^2.8.0",
     "jest-expo": "^0.3.0",
     "prettier": "^0.22.0",
     "react-native-scripts": "0.0.25",
