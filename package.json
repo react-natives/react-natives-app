@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "@kadira/react-native-storybook": "^2.0.0",
     "babel-eslint": "^7.2.1",
     "enzyme": "^2.8.0",
     "eslint": "^3.18.0",
@@ -14,8 +15,7 @@
     "react-native-scripts": "0.0.25",
     "react-test-renderer": "~15.4.1",
     "redux-logger": "^3.0.0",
-    "remote-redux-devtools": "^0.5.7",
-    "@kadira/react-native-storybook": "^2.0.0"
+    "remote-redux-devtools": "^0.5.7"
   },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
@@ -40,6 +40,7 @@
     "react-navigation": "^1.0.0-beta.7",
     "react-redux": "^5.0.3",
     "redux": "^3.6.0",
-    "redux-persist": "^4.5.0"
+    "redux-persist": "^4.5.0",
+    "styled-components": "^1.4.4"
   }
 }
